@@ -11,12 +11,11 @@
 | first_name         | string              | null: false               |
 | last_name_kana     | string              | null: false               |
 | first_name_kana    | string              | null: false               |
-| birthday_id        | date                | null: false               |
+| birthday           | date                | null: false               |
 
 ### Association
 
 - has_many :items
-- has_many :purchase-records
 
 
 ## items table
@@ -29,30 +28,30 @@
 | item_description        | text          | null: false                    |
 | condition_id            | integer       | null: false                    |
 | cost_id                 | integer       | null: false                    |
-| area_id                 | integer       | null: false                    |
+| prifecture_id           | integer       | null: false                    |
 | delivery_days_id        | integer       | null: false                    |
 | user                    | references    | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :user
-- has_one    :delivery-destinations
+- has_many   :purchases_records
 
 
-
-## purchases-records table
+## purchases_records table
 
 | Column      | Type       | Options                        |
 |-------------|------------|--------------------------------|
+| user        | references | null: false, foreign_key: true |
 | item_info   | references | null: false, foreign_key: true |
-
 
 ### Association
 
-- has_many :delivery-destinations
+- belongs_to :delivery_destination
+- belongs_to :item
 
 
-## delivery-destinations table
+## delivery_destinations table
 
 | Column          | Type       | Options                        |
 |-----------------|------------|--------------------------------|
@@ -61,9 +60,8 @@
 | city            | string     | null: false                    |
 | house_number    | string     | null: false                    |
 | room_number     | string     |                                |
-| phone_number    | integer    | null: false                    |
-| item_info       | references | null: false, foreign_key: true |
+| phone_number    | string     | null: false                    |
 
 ### Association
 
-- belongs_to :purchase_redords
+- has_one :purchase_record
