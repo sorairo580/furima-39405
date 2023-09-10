@@ -11,9 +11,7 @@
 | first_name         | string              | null: false               |
 | last_name_kana     | string              | null: false               |
 | first_name_kana    | string              | null: false               |
-| birth_year_id      | integer             | null: false               |
-| birth_month_id     | integer             | null: false               |
-| birth_day_id       | integer             | null: false               |
+| birthday_id        | date                | null: false               |
 
 ### Association
 
@@ -23,50 +21,49 @@
 
 ## items table
 
-| Column                  | Type       | Options                        |
-|-------------------------|------------|--------------------------------|
-| item_name               | string     | null: false                    |
-| category_id             | integer    | null: false                    |
-| price                   | integer    | null: false                    |
-| item_description        | text       | null: false                    |
-| condition_id            | integer    | null: false                    |
-| cost_id                 | integer    | null: false                    |
-| area_id                 | integer    | null: false                    |
-| days_id                 | integer    | null: false                    |
+| Column                  | Type          | Options                        |
+|-------------------------|---------------|--------------------------------|
+| item_name               | string        | null: false                    |
+| category_id             | integer       | null: false                    |
+| price                   | integer       | null: false                    |
+| item_description        | text          | null: false                    |
+| condition_id            | integer       | null: false                    |
+| cost_id                 | integer       | null: false                    |
+| area_id                 | integer       | null: false                    |
+| delivery_days_id        | integer       | null: false                    |
+| user                    | references    | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :user
 - has_one    :delivery-destinations
-- has_one    :purchase_records
+
 
 
 ## purchases-records table
 
 | Column      | Type       | Options                        |
 |-------------|------------|--------------------------------|
-| purchaser   | references | null: false, foreign_key: true |
 | item_info   | references | null: false, foreign_key: true |
 
 
 ### Association
 
-- belongs_to :users
-- has_many   :user_assemblys
+- has_many :delivery-destinations
 
 
 ## delivery-destinations table
 
 | Column          | Type       | Options                        |
 |-----------------|------------|--------------------------------|
-| zip_cord        | integer    | null: false                    |
+| zip_cord        | string     | null: false                    |
 | prifecture_id   | integer    | null: false                    |
 | city            | string     | null: false                    |
 | house_number    | string     | null: false                    |
 | room_number     | string     |                                |
 | phone_number    | integer    | null: false                    |
+| item_info       | references | null: false, foreign_key: true |
 
 ### Association
 
-- belongs_to :items
-- has_one    :purchase_redords
+- belongs_to :purchase_redords
