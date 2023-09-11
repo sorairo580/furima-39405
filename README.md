@@ -55,16 +55,15 @@
 
 ## delivery_destinations table
 
-| Column        | Type       | Options                        |
-|---------------|------------|--------------------------------|
-| zip_cord      | string     | null: false                    |
-| prifecture_id | integer    | null: false                    |
-| city          | string     | null: false                    |
-| house_number  | string     | null: false                    |
-| room_number   | string     |                                |
-| phone_number  | string     | null: false, unique: true      |
-| item          | references | null: false, foreign_key: true |
-| user          | references | null: false, foreign_key: true |
+| Column          | Type       | Options                        |
+|-----------------|------------|--------------------------------|
+| zip_cord        | string     | null: false                    |
+| prifecture_id   | integer    | null: false                    |
+| city            | string     | null: false                    |
+| house_number    | string     | null: false                    |
+| building_name   | string     |                                |
+| phone_number    | string     | null: false                    |
+| purchase_record | references | null: false, foreign_key: true |
 
 ### Association
 
