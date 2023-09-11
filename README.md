@@ -16,7 +16,7 @@
 ### Association
 
 - has_many :items
-- has_many :purchase-records
+- has_many :purchase_records
 
 
 ## items table
@@ -30,16 +30,16 @@
 | condition_id     | integer    | null: false                    |
 | cost_id          | integer    | null: false                    |
 | prifecture_id    | integer    | null: false                    |
-| delivery_days_id | integer    | null: false                    |
+| delivery_day_id  | integer    | null: false                    |
 | user             | references | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :user
-- has_one    :purchases_record
+- has_one    :purchase_record
 
 
-## purchases_records table
+## purchase_records table
 
 | Column | Type       | Options                        |
 |--------|------------|--------------------------------|
@@ -62,8 +62,9 @@
 | city          | string     | null: false                    |
 | house_number  | string     | null: false                    |
 | room_number   | string     |                                |
-| phone_number  | string     | null: false                    |
+| phone_number  | string     | null: false, unique: true      |
 | item          | references | null: false, foreign_key: true |
+| user          | references | null: false, foreign_key: true |
 
 ### Association
 
