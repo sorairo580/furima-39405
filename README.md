@@ -29,7 +29,7 @@
 | item_description | text       | null: false                    |
 | condition_id     | integer    | null: false                    |
 | cost_id          | integer    | null: false                    |
-| prifecture_id    | integer    | null: false                    |
+| prefecture_id    | integer    | null: false                    |
 | delivery_day_id  | integer    | null: false                    |
 | user             | references | null: false, foreign_key: true |
 
@@ -58,7 +58,7 @@
 | Column          | Type       | Options                        |
 |-----------------|------------|--------------------------------|
 | zip_cord        | string     | null: false                    |
-| prifecture_id   | integer    | null: false                    |
+| prefecture_id   | integer    | null: false                    |
 | city            | string     | null: false                    |
 | house_number    | string     | null: false                    |
 | building_name   | string     |                                |
