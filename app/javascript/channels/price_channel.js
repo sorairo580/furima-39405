@@ -10,7 +10,8 @@ window.addEventListener('load', function(){
       let taxPrice = inputValue * 0.1; 
       taxPrice = Math.floor(taxPrice); 
       taxSpan.textContent = taxPrice;
-      let profit = inputValue - taxPrice; 
+      let profit = inputValue - taxPrice;
+      profit = Math.floor(profit); 
       profitSpan.textContent = profit;
     } 
   })
