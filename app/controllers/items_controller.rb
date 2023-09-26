@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
   before_action :move_to_sessions_new, except: [:index, :show]
 
   def index
-    @items = Item.all
+    @items = Item.order("created_at DESC")
   end
 
   def new
