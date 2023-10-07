@@ -7,22 +7,21 @@ class PurchaseRecordsController < ApplicationController
     # end
   end
 
-   # def create
-  #   @purchase_record = Item.new(item_params[:id])
-  #   @purchase_record = User.new(item_params[:id])
-  #   if @purchase_record.save
-  #     redirect_to item_purchase_records_path
-  #   # else
-  #   #   render 
-  #   end
-  # end
+  def create
+    @order = PurchaseRecord.new(purchase_record.params)
+    if @order.valid?
+      @order.save
+      return redirect_to root_path
+    else
+      render 'purchase_records/index'
+    end
+  end
 
-  # private
+  private
 
-  # def item_params
-  #   params.require(:item).permit(:image, :item_name, :price, :item_description, :category_id, :condition_id, :cost_id,
-  #                                :delivery_day_id, :prefecture_id).merge(user_id: current_user.id)
-  # end
+  def purchase_record.params
+    params.require(:purchase_record).permit(:image, :item_name, :price, :cost_id).merge(user_id: current_user.id)
+  end
 
 
 end
