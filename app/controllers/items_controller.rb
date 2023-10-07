@@ -48,13 +48,11 @@ class ItemsController < ApplicationController
 
   def move_to_sessions_new
     return if user_signed_in?
-
     redirect_to new_user_session_path
   end
 
   def move_to_edit
     return if current_user.id == @item.user_id
-
     redirect_to root_path
   end
 

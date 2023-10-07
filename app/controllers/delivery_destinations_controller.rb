@@ -1,7 +1,10 @@
 class DeliveryDestinationsController < ApplicationController
-  def new
-  end
 
-  def create
-  end
+  # def index
+    
+  # end
+
+  # def create
+  # end
+
 end
