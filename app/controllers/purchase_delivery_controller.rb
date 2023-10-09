@@ -1,0 +1,3 @@
+class PurchaseDeliveryController < ApplicationController
+  
+end
