@@ -4,7 +4,8 @@ RSpec.describe PurchaseDelivery, type: :model do
   before do
     @user = FactoryBot.create(:user)
     @item = FactoryBot.build(:item)
-    @purchase_delivery = FactoryBot.build(:purchase_delivery, user_id: @user.id, item_id: @item.id)
+    @item.user = @user
+    @purchase_delivery = FactoryBot.build(:purchase_delivery, user_id: @user.id, item_id: @item.user_id)
   end
 
   describe '商品購入記録' do
@@ -13,7 +14,7 @@ RSpec.describe PurchaseDelivery, type: :model do
         expect(@purchase_delivery).to be_valid
       end
       it '郵便番号が「３桁‐４桁」の文字列で入力されている' do
-        expect(@purchase_delivery.zip_cord).to be_valid
+        expect(@purchase_delivery).to be_valid
       end
       it '電話番号が１０桁以上１１桁以内の半角数値で入力されている（ハイフンなし）' do
         expect(@purchase_delivery.phone_number).to be >= 0000000000
