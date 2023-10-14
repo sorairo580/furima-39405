@@ -105,14 +105,14 @@
   margin: 5px 5px;
 }
 
-.input-expiration-date-wrap {
+ /* .input-expiration-date-wrap {
   width: 100%;
   display: flex;
   text-align: center;
   line-height: 55px;
 }
 
-.input-expiration-date {
+ .input-expiration-date {
   width: 20%;
   margin-top: 5px;
   height: 48px;
@@ -123,7 +123,7 @@
   resize: none;
   line-height: 45px;
   text-align: center;
-}
+}  */
 
 /* /カード情報の入力 */
 

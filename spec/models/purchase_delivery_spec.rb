@@ -17,7 +17,7 @@ RSpec.describe PurchaseDelivery, type: :model do
         expect(@purchase_delivery).to be_valid
       end
       it '電話番号が１０桁以上１１桁以内の半角数値で入力されている（ハイフンなし）' do
-        expect(@purchase_delivery.phone_number).to be >= 0000000000
+        expect(@purchase_delivery.phone_number).to be >= 0000000001
         expect(@purchase_delivery.phone_number).to be <= 99999999999
       end
       it '建物名が空でも購入できる' do
@@ -31,15 +31,10 @@ RSpec.describe PurchaseDelivery, type: :model do
         @purchase_delivery.valid?
         expect(@purchase_delivery.errors.full_messages).to include("Card number can't be blank")
       end
-      it '有効期限（月）が入力されていない' do
-        @purchase_delivery.card_expiry_month = nil
+      it '有効期限が入力されていない' do
+        @purchase_delivery.card_exp = nil
         @purchase_delivery.valid?
-        expect(@purchase_delivery.errors.full_messages).to include("Card expiry month can't be blank")
-      end
-      it '有効期限（年）が入力されていない' do
-        @purchase_delivery.card_expiry_year = nil
-        @purchase_delivery.valid?
-        expect(@purchase_delivery.errors.full_messages).to include("Card expiry year can't be blank")
+        expect(@purchase_delivery.errors.full_messages).to include("Card exp can't be blank")
       end
       it '郵便番号が入力されていない' do
         @purchase_delivery.zip_cord = nil
@@ -90,6 +85,11 @@ RSpec.describe PurchaseDelivery, type: :model do
         @purchase_delivery.phone_number = '090123456７'
         @purchase_delivery.valid?
         expect(@purchase_delivery.errors.full_messages).to include("Phone number is invalid")
+      end
+      it 'tokenが空になっている' do
+        @purchase_delivery.token = ''
+        @purchase_delivery.valid?
+        expect(@purchase_delivery.errors.full_messages).to include("Token can't be blank")
       end
     end
   end
