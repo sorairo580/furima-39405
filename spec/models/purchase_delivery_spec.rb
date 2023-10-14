@@ -10,7 +10,7 @@ RSpec.describe PurchaseDelivery, type: :model do
 
   describe '商品購入記録' do
     context '商品を購入できるとき' do
-      it 'クレジットカード情報が入力されており、配送先情報がすべて入力されている' do
+      it 'クレジットカード情報（token）が存在し、配送先情報がすべて入力されている' do
         expect(@purchase_delivery).to be_valid
       end
       it '郵便番号が「３桁‐４桁」の文字列で入力されている' do
@@ -26,16 +26,16 @@ RSpec.describe PurchaseDelivery, type: :model do
       end
     end
     context '商品を購入できないとき' do
-      it 'カード番号が入力されていない' do
-        @purchase_delivery.card_number = nil
-        @purchase_delivery.valid?
-        expect(@purchase_delivery.errors.full_messages).to include("Card number can't be blank")
-      end
-      it '有効期限が入力されていない' do
-        @purchase_delivery.card_exp = nil
-        @purchase_delivery.valid?
-        expect(@purchase_delivery.errors.full_messages).to include("Card exp can't be blank")
-      end
+      # it 'カード番号が入力されていない' do
+      #   @purchase_delivery.card_number = nil
+      #   @purchase_delivery.valid?
+      #   expect(@purchase_delivery.errors.full_messages).to include("Card number can't be blank")
+      # end
+      # it '有効期限が入力されていない' do
+      #   @purchase_delivery.card_exp = nil
+      #   @purchase_delivery.valid?
+      #   expect(@purchase_delivery.errors.full_messages).to include("Card exp can't be blank")
+      # end
       it '郵便番号が入力されていない' do
         @purchase_delivery.zip_cord = nil
         @purchase_delivery.valid?

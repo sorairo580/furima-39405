@@ -1,6 +1,6 @@
 class PurchaseDelivery
   include ActiveModel::Model
-  attr_accessor  :card_number, :card_exp, :card_cvc, :user_id, :item_id, :zip_cord,
+  attr_accessor :card_number, :card_exp, :card_cvc, :user_id, :item_id, :zip_cord,
    :prefecture_id, :city, :house_number, :building_name, :phone_number, :token
 
   with_options presence: true do
@@ -8,9 +8,9 @@ class PurchaseDelivery
     # validates :item_name
     # validates :price,   numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999_999, message: 'is invalid' }
     # validates :cost_id,   numericality: { other_than: 1, message: "can't be blank" }
-    validates :card_number
-    validates :card_exp
-    validates :card_cvc
+    # validates :card_number
+    # validates :card_exp
+    # validates :card_cvc
     validates :user_id
     validates :item_id, numericality: { only_integer: true, greater_than_or_equal_to: 1, message: 'is invalid' }
     validates :token
@@ -26,7 +26,9 @@ class PurchaseDelivery
   def save
     @item = PurchaseRecord.new(user_id: user_id, item_id: item_id)
     DeliveryDestination.new(zip_cord: zip_cord, prefecture_id: prefecture_id, city: city, house_number: house_number, building_name: building_name,
-       phone_number: phone_number, purchase_record_id: purchase_record_id)
+       phone_number: phone_number)
   end
 
 end
+
+# , purchase_record_id: purchase_record_id
