@@ -3,14 +3,18 @@ class PurchaseRecordsController < ApplicationController
   before_action :find_item 
 
   def index
-    @purchase_delivery = PurchaseDelivery.new
+    if user_signed_in? && current_user.id != @item.user_id && !@item.purchase_record.present?
+      @purchase_delivery = PurchaseDelivery.new
+    else
+      return redirect_to root_path
+    end
   end
 
   def create
     @purchase_delivery = PurchaseDelivery.new(purchase_record_params)
       if @purchase_delivery.valid?
         pay_item
-      @purchase_delivery.save
+        @purchase_delivery.save
       return redirect_to root_path
     else
       render :index
