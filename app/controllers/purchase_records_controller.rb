@@ -3,10 +3,7 @@ class PurchaseRecordsController < ApplicationController
   before_action :find_item 
 
   def index
-    # if @item.exist?
     @purchase_delivery = PurchaseDelivery.new
-    # redirect_to item_purchase_record_index_path
-    # end
   end
 
   def create
