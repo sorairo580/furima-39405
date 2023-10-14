@@ -1,7 +1,7 @@
 class PurchaseDelivery
   include ActiveModel::Model
   attr_accessor :card_number, :card_exp, :card_cvc, :user_id, :item_id, :zip_cord,
-   :prefecture_id, :city, :house_number, :building_name, :phone_number, :token
+   :prefecture_id, :city, :house_number, :building_name, :phone_number, :token, :purchase_record_id
 
   with_options presence: true do
     # validates :image
@@ -24,11 +24,9 @@ class PurchaseDelivery
   end
 
   def save
-    @item = PurchaseRecord.new(user_id: user_id, item_id: item_id)
-    DeliveryDestination.new(zip_cord: zip_cord, prefecture_id: prefecture_id, city: city, house_number: house_number, building_name: building_name,
-       phone_number: phone_number)
+    @item = PurchaseRecord.create(user_id: user_id, item_id: item_id)
+    delivery_destination_data = {zip_cord: zip_cord, prefecture_id: prefecture_id, city: city, house_number: house_number, building_name: building_name, phone_number: phone_number, purchase_record_id: @item.id}
+    DeliveryDestination.create(delivery_destination_data)
   end
 
 end
-
-# , purchase_record_id: purchase_record_id
