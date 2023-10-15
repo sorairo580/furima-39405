@@ -1,5 +1,4 @@
 require 'rails_helper'
 
-RSpec.describe "DeliveryDestinations", type: :request do
-
+RSpec.describe 'DeliveryDestinations', type: :request do
 end

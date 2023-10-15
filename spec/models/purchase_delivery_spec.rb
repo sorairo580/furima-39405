@@ -18,7 +18,7 @@ RSpec.describe PurchaseDelivery, type: :model do
       end
       it '電話番号が１０桁以上１１桁以内の半角数値で入力されている（ハイフンなし）' do
         expect(@purchase_delivery.phone_number).to be >= 0000000001
-        expect(@purchase_delivery.phone_number).to be <= 99999999999
+        expect(@purchase_delivery.phone_number).to be <= 99_999_999_999
       end
       it '建物名が空でも購入できる' do
         @purchase_delivery.building_name = ''
@@ -26,16 +26,6 @@ RSpec.describe PurchaseDelivery, type: :model do
       end
     end
     context '商品を購入できないとき' do
-      # it 'カード番号が入力されていない' do
-      #   @purchase_delivery.card_number = nil
-      #   @purchase_delivery.valid?
-      #   expect(@purchase_delivery.errors.full_messages).to include("Card number can't be blank")
-      # end
-      # it '有効期限が入力されていない' do
-      #   @purchase_delivery.card_exp = nil
-      #   @purchase_delivery.valid?
-      #   expect(@purchase_delivery.errors.full_messages).to include("Card exp can't be blank")
-      # end
       it '郵便番号が入力されていない' do
         @purchase_delivery.zip_cord = nil
         @purchase_delivery.valid?
@@ -44,12 +34,12 @@ RSpec.describe PurchaseDelivery, type: :model do
       it '郵便番号が「３桁‐４桁」の文字列で入力されていない' do
         @purchase_delivery.zip_cord = '123-456７'
         @purchase_delivery.valid?
-        expect(@purchase_delivery.errors.full_messages).to include("Zip cord is invalid")
+        expect(@purchase_delivery.errors.full_messages).to include('Zip cord is invalid')
       end
       it '郵便番号にハイフンが入力されていない' do
         @purchase_delivery.zip_cord = '1234567'
         @purchase_delivery.valid?
-        expect(@purchase_delivery.errors.full_messages).to include("Zip cord is invalid")
+        expect(@purchase_delivery.errors.full_messages).to include('Zip cord is invalid')
       end
       it '都道府県が入力されていない' do
         @purchase_delivery.prefecture_id = 1
@@ -71,20 +61,30 @@ RSpec.describe PurchaseDelivery, type: :model do
         @purchase_delivery.valid?
         expect(@purchase_delivery.errors.full_messages).to include("Phone number can't be blank")
       end
-      it '電話番号が１０桁以上１１桁以内の半角数値で入力されていない' do
+      it '電話番号が９桁以下では購入できない' do
         @purchase_delivery.phone_number = '090123456'
         @purchase_delivery.valid?
-        expect(@purchase_delivery.errors.full_messages).to include("Phone number is invalid")
+        expect(@purchase_delivery.errors.full_messages).to include('Phone number is invalid')
       end
-      it '電話番号が１０桁以上１１桁以内の半角数値で入力されていない' do
+      it '電話番号が１２桁以上では購入できない' do
+        @purchase_delivery.phone_number = '090123456789'
+        @purchase_delivery.valid?
+        expect(@purchase_delivery.errors.full_messages).to include('Phone number is invalid')
+      end
+      it '電話番号に半角数値以外が含まれている' do
         @purchase_delivery.phone_number = '090-1234-5678'
         @purchase_delivery.valid?
-        expect(@purchase_delivery.errors.full_messages).to include("Phone number is invalid")
+        expect(@purchase_delivery.errors.full_messages).to include('Phone number is invalid')
       end
-      it '電話番号が１０桁以上１１桁以内の半角数値で入力されていない' do
-        @purchase_delivery.phone_number = '090123456７'
+      it 'userが紐づいていなければ購入できない' do
+        @purchase_delivery.user_id = nil
         @purchase_delivery.valid?
-        expect(@purchase_delivery.errors.full_messages).to include("Phone number is invalid")
+        expect(@purchase_delivery.errors.full_messages).to include("User can't be blank")
+      end
+      it 'itemが紐づいていなければ購入できない' do
+        @purchase_delivery.item_id = nil
+        @purchase_delivery.valid?
+        expect(@purchase_delivery.errors.full_messages).to include("Item can't be blank")
       end
       it 'tokenが空になっている' do
         @purchase_delivery.token = ''
