@@ -13,9 +13,6 @@ RSpec.describe PurchaseDelivery, type: :model do
       it 'クレジットカード情報（token）が存在し、配送先情報がすべて入力されている' do
         expect(@purchase_delivery).to be_valid
       end
-      it '郵便番号が「３桁‐４桁」の文字列で入力されている' do
-        expect(@purchase_delivery).to be_valid
-      end
       it '電話番号が１０桁以上１１桁以内の半角数値で入力されている（ハイフンなし）' do
         expect(@purchase_delivery.phone_number).to be >= 0000000001
         expect(@purchase_delivery.phone_number).to be <= 99_999_999_999

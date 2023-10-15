@@ -7,8 +7,6 @@ class PurchaseDelivery
     validates :user_id
     validates :item_id, numericality: { only_integer: true, greater_than_or_equal_to: 1, message: 'is invalid' }
     validates :token
-  end
-  with_options presence: true do
     validates :zip_cord, format: { with: /\A\d{3}-\d{4}\z/, message: 'is invalid' }
     validates :prefecture_id, numericality: { other_than: 1, message: "can't be blank" }
     validates :city
