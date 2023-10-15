@@ -1,0 +1,2 @@
+class DeliveryDestinationsController < ApplicationController
+end
