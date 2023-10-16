@@ -12,9 +12,9 @@ RSpec.describe Item, type: :model do
       it '写真が1枚添付されている及び商品名・価格・商品説明・カテゴリー・状態・配送料・配送期間・配送元が入力されている' do
         expect(@item).to be_valid
       end
-      it '価格が300円～9,999,999,999円の範囲である' do
+      it '価格が300円～9,999,999円の範囲である' do
         expect(@item.price).to be >= 300
-        expect(@item.price).to be <= 9_999_999_999
+        expect(@item.price).to be <= 9_999_999
       end
     end
     context '商品を出品できないとき' do
