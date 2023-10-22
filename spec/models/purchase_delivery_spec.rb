@@ -14,7 +14,7 @@ RSpec.describe PurchaseDelivery, type: :model do
         expect(@purchase_delivery).to be_valid
       end
       it '電話番号が１０桁以上１１桁以内の半角数値で入力されている（ハイフンなし）' do
-        expect(@purchase_delivery.phone_number).to be >= 0000000001
+        expect(@purchase_delivery.phone_number).to be >= 0_000_000_001
         expect(@purchase_delivery.phone_number).to be <= 99_999_999_999
       end
       it '建物名が空でも購入できる' do
